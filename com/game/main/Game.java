@@ -22,8 +22,10 @@ public class Game extends Canvas implements  Runnable{
         hud = new HUD();
         spawner = new Spawn(handler, hud);
         r = new Random();
+
         handler.addObj(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player, handler));
-        handler.addObj(new BasicEnemy(r.nextInt(Game.WIDTH), r.nextInt(Game.HEIGHT), ID.BasicEnemy, handler));
+
+        handler.addObj(new BasicEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.BasicEnemy, handler));
 
 //        for(int i=0; i<=2;i++){
 //            handler.addObj(new BasicEnemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.BasicEnemy,handler));

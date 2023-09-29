@@ -28,6 +28,16 @@ public class Spawn {
             else if(hud.getLevel()==5){
                 handler.addObj(new SmartEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.SmartEnemy, handler));
             }
+            else if(hud.getLevel()==6){
+                handler.addObj(new FastEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.FastEnemy, handler));
+            }
+            else if(hud.getLevel()==7){
+                handler.addObj(new FastEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.FastEnemy, handler));
+            }
+            else if(hud.getLevel()==10){
+                handler.clearEnemys();
+                handler.addObj(new EnemyBoss((Game.WIDTH /2) -48, -120 , ID.EnemyBoss, handler));
+            }
         }
     }
 }
