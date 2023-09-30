@@ -13,19 +13,34 @@ public class Game extends Canvas implements  Runnable{
     private Random r;
     private HUD hud;
     private Spawn spawner;
+    private Menu menu;
+    public enum  STATE {
+        Menu,
+        Help,
+        Game
+    };
+
+
+    public STATE gameState = STATE.Menu;
+
     public Game(){
         handler = new Handler();
+        menu = new Menu(this, handler);
         this.addKeyListener(new KeyInput(handler));
-
+        this.addMouseListener(menu);
         new Window(WIDTH, HEIGHT, "Game title", this);
 
         hud = new HUD();
         spawner = new Spawn(handler, hud);
+
         r = new Random();
 
-        handler.addObj(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player, handler));
+        if(gameState == STATE.Game){
+            handler.addObj(new Player(WIDTH/2-32,HEIGHT/2-32,ID.Player, handler));
 
-        handler.addObj(new BasicEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.BasicEnemy, handler));
+            handler.addObj(new BasicEnemy(r.nextInt(Game.WIDTH - 30), r.nextInt(Game.HEIGHT - 30), ID.BasicEnemy, handler));
+        }
+
 
 //        for(int i=0; i<=2;i++){
 //            handler.addObj(new BasicEnemy(r.nextInt(WIDTH),r.nextInt(HEIGHT),ID.BasicEnemy,handler));
@@ -91,8 +106,13 @@ public class Game extends Canvas implements  Runnable{
     }
     private void tick(){
         handler.tickHandler();
-        hud.tick();
-        spawner.tick();
+        if(gameState == STATE.Game){
+            hud.tick();
+            spawner.tick();
+        }else if(gameState == STATE.Menu){
+            menu.tick();
+        }
+
     }
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
@@ -106,7 +126,13 @@ public class Game extends Canvas implements  Runnable{
         g.fillRect(0,0,WIDTH,HEIGHT);
 
         handler.renderHandler(g);
-        hud.render(g);
+
+        if(gameState == STATE.Game){
+            hud.render(g);
+        }else if(gameState == STATE.Menu || gameState == STATE.Help){
+            menu.render(g);
+        }
+
         bs.show();
         g.dispose();
     }
