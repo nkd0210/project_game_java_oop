@@ -26,7 +26,8 @@ public class    Handler {//loop through all objects in the game, individually up
 
             if(tempObject.getID() == ID.Player) {
                 ObjectList.clear();
-                addObj(new Player((int)tempObject.getX(),(int) tempObject.getY(), ID.Player, this));
+                if(Game.gameState != Game.STATE.End)
+                    addObj(new Player((int)tempObject.getX(),(int) tempObject.getY(), ID.Player, this));
             }
         }
     }
