@@ -6,6 +6,8 @@ import java.util.LinkedList;
 public class    Handler {//loop through all objects in the game, individually update and render them to the screen
     LinkedList<GameObject> ObjectList = new LinkedList<GameObject>();
 
+    public int spd = 5;
+
     public void tickHandler(){
         for(int i=0; i< ObjectList.size(); i++){
             GameObject tempObject = ObjectList.get(i);
